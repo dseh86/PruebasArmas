@@ -18,23 +18,27 @@ public class Francotirador : MonoBehaviour {
         currentFOV = miCamara.fieldOfView;
     }
 
-
     private void Update() {
         if (Input.GetMouseButtonDown(1)) {
             Debug.Log("Boton derecho pulsado");
             apuntando = true;
-            mirilla.SetActive(true);
- 
-        }
+         }
         if (Input.GetMouseButtonUp(1)) {
         
             apuntando = false;
+            currentFOV = maxFOV;
+            mirilla.SetActive(false);
         }
 
         if (apuntando == true) {
             currentFOV = currentFOV - 1;
             currentFOV = Mathf.Max(currentFOV, minFOV);
+            if (currentFOV == minFOV) {
+                mirilla.SetActive(true);
+            }
         }
+
+        miCamara.fieldOfView = currentFOV;
 
     }
         
